@@ -6,7 +6,7 @@ const propTypes = {
 	color: PropTypes.oneOf(["red", "yellow", "green", "blue"]),
 	type: PropTypes.oneOf(["button", "submit", "reset", "link", "nav"]),
 	rounding: PropTypes.oneOf(["none", "sm", "md", "lg"]),
-	background: PropTypes.bool,
+	backgroundClassName: PropTypes.string,
 	disabled: PropTypes.bool,
 	depth: PropTypes.bool,
 	children: PropTypes.node,
@@ -18,7 +18,7 @@ function Button({
 	color = "blue",
 	type = "button",
 	rounding = "md",
-	background = false,
+	backgroundClassName = false,
 	disabled = false,
 	depth = true,
 	className: additionalClassName,
@@ -32,18 +32,16 @@ function Button({
 		md: "rounded-lg",
 		lg: "rounded-full",
 	};
-	const backgroundClassName =
-		"bg-[url(hawaii.svg)] bg-no-repeat bg-center bg-blend-multiply";
 	const buttonClassName = clsx(
 		"flex font-bold",
 		"items-center justify-center text-center",
 		"transition-all",
 		"select-none",
 		roundingClassNames[rounding],
-		color === "red" && "focus:ring-hawaii-red",
-		color === "yellow" && "focus:ring-hawaii-yellow",
-		color === "green" && "focus:ring-hawaii-green",
-		color === "blue" && "focus:ring-hawaii-blue",
+		color === "red" && "focus:outline-hawaii-red",
+		color === "yellow" && "focus:outline-hawaii-yellow",
+		color === "green" && "focus:outline-hawaii-green",
+		color === "blue" && "focus:outline-hawaii-blue",
 		disabled
 			? [
 					"pointer-events-none",
@@ -89,7 +87,7 @@ function Button({
 				]
 			: [
 					"p-4",
-					background && backgroundClassName,
+					backgroundClassName,
 					color === "red" && "bg-hawaii-red-50 dark:bg-hawaii-red-950",
 					color === "yellow" && "bg-hawaii-yellow-50 dark:bg-hawaii-yellow-950",
 					color === "green" && "bg-hawaii-green-50 dark:bg-hawaii-green-950",
@@ -117,7 +115,7 @@ function Button({
 	);
 	const buttonTopClassName = clsx(
 		roundingClassNames[rounding],
-		background && backgroundClassName,
+		backgroundClassName,
 		"flex items-center justify-center",
 		"size-fit min-h-full min-w-full p-4",
 		"relative",

@@ -1,18 +1,19 @@
-import TextInput from "./text-input";
+import UrlInput from "./url-input";
 
 const meta = {
-	component: TextInput,
+	component: UrlInput,
 };
 
 export default meta;
 
 export const Default = {
 	args: {
-		label: "Text Input",
+		label: "Url Input",
 		labelPosition: "top",
 		color: "blue",
-		placeholder: "Enter text...",
+		placeholder: "https://www.website.com",
 		required: true,
 		className: "w-full max-w-80",
+		button: true,
 	},
 };

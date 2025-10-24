@@ -1,18 +1,19 @@
-import TextInput from "./text-input";
+import SearchInput from "./search-input";
 
 const meta = {
-	component: TextInput,
+	component: SearchInput,
 };
 
 export default meta;
 
 export const Default = {
 	args: {
-		label: "Text Input",
+		label: "Search Input",
 		labelPosition: "top",
 		color: "blue",
-		placeholder: "Enter text...",
+		placeholder: "Search...",
 		required: true,
 		className: "w-full max-w-80",
+		button: true,
 	},
 };

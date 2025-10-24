@@ -1,8 +1,10 @@
 import clsx from "clsx";
 import PropTypes from "prop-types";
-import Button from "~/components/inputs/button";
 import BaseInput from "../components/base-input";
 import InputWrapper from "../components/input-wrapper";
+import InputRow from "../components/input-row";
+import Button from "~/components/inputs/button";
+import { sizingRegex } from "~/components/utils/tailwind-regex";
 
 import { useRef, useState, useEffect } from "react";
 
@@ -27,7 +29,7 @@ function NumberInput({
 	label,
 	labelPosition = "top",
 	required = false,
-	placeholder = "Input...",
+	placeholder = "#",
 	color = "blue",
 	step = 1,
 	min,
@@ -105,17 +107,21 @@ function NumberInput({
 		"aria-label": delta > 0 ? "Increment" : "Decrement",
 	});
 	const numberInputClassName = clsx(
-		"font-mono slashed-zero tabular-nums",
-		additionalClassName,
+		"font-mono slashed-zero tabular-nums placeholder:font-sans",
+		additionalClassName?.replace(sizingRegex, ""),
 	);
-	const buttonClassName = clsx("px-2 py-1");
+	const numberInputWrapperClassName = clsx(
+		additionalClassName?.match(sizingRegex),
+	);
+	const buttonClassName = clsx("px-2 py-1 font-mono");
 	return (
 		<InputWrapper
 			label={label}
 			labelPosition={labelPosition}
 			required={required}
+			className={numberInputWrapperClassName}
 		>
-			<div className="flex flex-row gap-2">
+			<InputRow>
 				<Button
 					topClassName={buttonClassName}
 					color={color}
@@ -148,7 +154,7 @@ function NumberInput({
 				>
 					→
 				</Button>
-			</div>
+			</InputRow>
 		</InputWrapper>
 	);
 }

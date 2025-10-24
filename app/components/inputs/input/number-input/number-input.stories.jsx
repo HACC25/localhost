@@ -16,10 +16,11 @@ export const Default = {
 		label: "Number Input",
 		labelPosition: "top",
 		color: "blue",
-		placeholder: "Placeholder...",
+		placeholder: "#",
 		onChange: increment,
 		required: true,
 		step: 1,
+		className: "w-full max-w-80",
 	},
 	render: (args) => <NumberInput value={value} {...args} />,
 };

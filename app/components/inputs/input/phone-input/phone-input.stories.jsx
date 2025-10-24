@@ -1,18 +1,19 @@
-import TextInput from "./text-input";
+import PhoneInput from "./phone-input";
 
 const meta = {
-	component: TextInput,
+	component: PhoneInput,
 };
 
 export default meta;
 
 export const Default = {
 	args: {
-		label: "Text Input",
+		label: "Phone Input",
 		labelPosition: "top",
 		color: "blue",
-		placeholder: "Enter text...",
+		placeholder: "(###) ###-####",
 		required: true,
 		className: "w-full max-w-80",
+		button: true,
 	},
 };

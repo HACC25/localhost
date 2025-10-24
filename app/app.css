@@ -79,6 +79,12 @@
 }
 @custom-variant dark (&:where(.dark, .dark *));
 
+/*@layer utilities {
+  .inset-shadow-full {
+	box-shadow: 0 0 0 1000px var(--tw-inset-shadow-color) inset;
+  }
+}*/
+
 @layer base {
 	.font-olelo {
 		font-family: var(--font-olelo);
@@ -88,19 +94,16 @@
 		-webkit-appearance: none;
 	}
 	input:-webkit-autofill {
-		box-shadow: 0 0 0 1000px transparent inset !important;
-		-webkit-text-fill-color: inherit !important;
+		transition:
+			background-color 9999s ease-in-out 0s,
+			color 9999s ease-in-out 0s !important;
 	}
-
 	* {
-		--tw-ring-offset-color: #fff;
-		@apply ring-0;
-	}
-	.dark * {
-		--tw-ring-offset-color: #000;
+		@apply outline-0 outline-offset-0;
+		@apply bg-center bg-no-repeat bg-blend-multiply;
 	}
 	*:focus {
-		@apply ring-2 ring-offset-1 outline-hidden;
+		@apply outline-2 outline-offset-1;
 	}
 	html,
 	body {

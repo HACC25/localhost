@@ -1,17 +1,17 @@
-import TextInput from "./text-input";
+import PasswordInput from "./password-input";
 
 const meta = {
-	component: TextInput,
+	component: PasswordInput,
 };
 
 export default meta;
 
 export const Default = {
 	args: {
-		label: "Text Input",
+		label: "Password Input",
 		labelPosition: "top",
 		color: "blue",
-		placeholder: "Enter text...",
+		placeholder: "Password...",
 		required: true,
 		className: "w-full max-w-80",
 	},

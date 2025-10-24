@@ -11,7 +11,9 @@ export const Default = {
 		label: "Email Input",
 		labelPosition: "top",
 		color: "blue",
-		placeholder: "john.doe@gmail.com",
+		placeholder: "john.doe@email.com",
 		required: true,
+		className: "w-full max-w-80",
+		button: true,
 	},
 };
