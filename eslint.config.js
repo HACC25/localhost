@@ -1,9 +1,9 @@
+import storybook from "eslint-plugin-storybook";
 import js from "@eslint/js";
 import json from "@eslint/json";
 import markdown from "@eslint/markdown";
 import css from "@eslint/css";
 import globals from "globals";
-import tseslint from "typescript-eslint";
 import pluginReact from "eslint-plugin-react";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
 import tailwind from "eslint-plugin-tailwindcss";
@@ -36,7 +36,6 @@ export default [
 		plugins: { markdown },
 		language: "markdown/commonmark",
 	},
-	...tseslint.configs.recommended,
 	{
 		...pluginReact.configs.flat.recommended,
 		rules: {
@@ -59,4 +58,5 @@ export default [
 		},
 	],
 	eslintConfigPrettier,
+	...storybook.configs["flat/recommended"],
 ];
