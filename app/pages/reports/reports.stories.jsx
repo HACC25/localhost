@@ -1,7 +1,7 @@
-import Home from "./home";
+import Reports from "./reports";
 
 const meta = {
-	component: Home,
+	component: Reports,
 };
 
 export default meta;

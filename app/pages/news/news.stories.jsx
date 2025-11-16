@@ -1,7 +1,7 @@
-import Home from "./home";
+import News from "./news";
 
 const meta = {
-	component: Home,
+	component: News,
 };
 
 export default meta;

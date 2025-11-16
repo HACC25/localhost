@@ -1,7 +1,7 @@
-import Home from "./home";
+import Contact from "./contact";
 
 const meta = {
-	component: Home,
+	component: Contact,
 };
 
 export default meta;
