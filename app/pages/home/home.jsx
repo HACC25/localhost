@@ -1,22 +1,18 @@
 import clsx from "clsx";
 import PropTypes from "prop-types";
-import { Outlet } from "react-router";
 
 const propTypes = {
-	className: PropTypes.string,
-	children: PropTypes.node,
+	users: PropTypes.object,
 };
 
-function Home({ className: additionalClassName, children, ...attributes }) {
+function Home({ users, ...attributes }) {
 	const homeClassName = clsx(
-		"flex size-full flex-col items-center justify-center gap-2 p-4",
-		additionalClassName,
+		"flex size-full items-center justify-center text-xl font-black",
 	);
 	return (
-		<main className={homeClassName} {...attributes}>
-			<Outlet />
-			{children}
-		</main>
+		<div className={homeClassName} {...attributes}>
+			Home Page
+		</div>
 	);
 }
 Home.propTypes = propTypes;
