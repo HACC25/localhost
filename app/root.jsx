@@ -6,22 +6,11 @@ import {
 	Scripts,
 	ScrollRestoration,
 } from "react-router";
-import PropTypes from "prop-types";
+import App from "~/pages/app";
 
 import "./app.css";
-
-export const links = () => [
-	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
-	{
-		rel: "preconnect",
-		href: "https://fonts.gstatic.com",
-		crossOrigin: "anonymous",
-	},
-	{
-		rel: "stylesheet",
-		href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
-	},
-];
+import PropTypes from "prop-types";
+import DarkModeScript from "~/components/utils/dark-mode-script";
 
 export function Layout({ children }) {
 	return (
@@ -29,6 +18,7 @@ export function Layout({ children }) {
 			<head>
 				<meta charSet="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<DarkModeScript />
 				<Meta />
 				<Links />
 			</head>
@@ -45,9 +35,7 @@ Layout.propTypes = {
 	children: PropTypes.node,
 };
 
-export default function App() {
-	return <Outlet />;
-}
+export default App;
 
 export function ErrorBoundary({ error }) {
 	let message = "Oops!";
