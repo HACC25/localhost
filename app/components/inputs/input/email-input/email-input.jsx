@@ -71,9 +71,10 @@ function EmailInput({
 	);
 	return (
 		<InputWrapper
+			type="email"
 			label={label}
 			labelPosition={labelPosition}
-			required={required}
+			color={color}
 			className={emailInputWrapperClassName}
 		>
 			{button ? (

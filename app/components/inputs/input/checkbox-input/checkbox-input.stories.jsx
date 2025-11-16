@@ -1,17 +1,16 @@
-import PasswordInput from "./password-input";
+import CheckboxInput from "./checkbox-input";
 
 const meta = {
-	component: PasswordInput,
+	component: CheckboxInput,
 };
 
 export default meta;
 
 export const Default = {
 	args: {
-		label: "Password Input",
+		label: "Checkbox Input",
 		labelPosition: "top",
 		color: "blue",
-		placeholder: "Password",
 		required: true,
 		className: "w-full max-w-80",
 	},

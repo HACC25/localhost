@@ -1,18 +1,25 @@
 import clsx from "clsx";
 import PropTypes from "prop-types";
+import { hawaiiColor } from "~/components/utils/color";
+import { typeToIcon } from "~/components/utils/input";
+import ColoredText from "~/components/data-displays/colored-text";
 
 const propTypes = {
+	type: PropTypes.string,
+	color: PropTypes.oneOf(hawaiiColor),
 	label: PropTypes.string,
 	labelPosition: PropTypes.oneOf(["top", "bottom", "left", "right"]),
-	required: PropTypes.bool,
+	id: PropTypes.string,
 	children: PropTypes.node,
 	className: PropTypes.string,
 };
 
 function InputWrapper({
+	type = "text",
+	color = "blue",
 	label,
 	labelPosition = "top",
-	required = false,
+	id,
 	children,
 	className: additionalClassName,
 	...attributes
@@ -28,14 +35,24 @@ function InputWrapper({
 		additionalClassName,
 	);
 	const labelClassName = clsx(
-		"flex text-sm font-bold",
-		required && "after:text-xs after:text-red-500 after:content-['*']",
+		"flex shrink-0 text-sm font-bold",
+		"after:text-xs after:text-red-500 peer-required/wrapper:after:content-['*'] peer-has-required/wrapper:after:content-['*']",
+		"-order-1",
 	);
 
 	return (
 		<div className={wrapperClassName} {...attributes}>
-			{label && <label className={labelClassName}>{label}</label>}
 			{children}
+			{label && (
+				<label htmlFor={id} className={labelClassName}>
+					{type && (
+						<ColoredText color={color} className="font-symbols pr-0.5">
+							{typeToIcon(type)}
+						</ColoredText>
+					)}
+					{label}
+				</label>
+			)}
 		</div>
 	);
 }

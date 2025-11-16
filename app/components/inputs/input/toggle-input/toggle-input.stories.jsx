@@ -1,17 +1,17 @@
-import PasswordInput from "./password-input";
+import ToggleInput from "./toggle-input";
 
 const meta = {
-	component: PasswordInput,
+	component: ToggleInput,
 };
 
 export default meta;
 
 export const Default = {
 	args: {
-		label: "Password Input",
+		label: "Toggle Input",
 		labelPosition: "top",
 		color: "blue",
-		placeholder: "Password",
+		placeholder: "Enter text...",
 		required: true,
 		className: "w-full max-w-80",
 	},

@@ -50,7 +50,7 @@ function NumberInput({
 
 	useEffect(() => {
 		setCurrentValue(capNumber(value));
-	}, [value]);
+	}, [value, min, max]);
 
 	const internalOnChange = (e) => {
 		if (onChange) onChange(e);
@@ -116,9 +116,10 @@ function NumberInput({
 	const buttonClassName = clsx("px-2 py-1 font-mono");
 	return (
 		<InputWrapper
+			type="number"
 			label={label}
 			labelPosition={labelPosition}
-			required={required}
+			color={color}
 			className={numberInputWrapperClassName}
 		>
 			<InputRow>
@@ -138,6 +139,8 @@ function NumberInput({
 					required={required}
 					placeholder={placeholder}
 					color={color}
+					min={min}
+					max={max}
 					onChange={internalOnChange}
 					onKeyDown={(e) => {
 						if (e.key === "ArrowLeft") updateValue(-step);

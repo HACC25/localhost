@@ -26,7 +26,7 @@ function PasswordInput({
 	label,
 	labelPosition = "top",
 	required = false,
-	placeholder = "Input...",
+	placeholder = "Password",
 	color = "blue",
 	onChange,
 	className: additionalClassName,
@@ -54,9 +54,10 @@ function PasswordInput({
 
 	return (
 		<InputWrapper
+			type="password"
 			label={label}
 			labelPosition={labelPosition}
-			required={required}
+			color={color}
 			className={passwordInputWrapperClassName}
 		>
 			<InputRow>

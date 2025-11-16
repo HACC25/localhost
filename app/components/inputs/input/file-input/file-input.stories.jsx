@@ -1,18 +1,19 @@
-import PasswordInput from "./password-input";
+import FileInput from "./file-input";
 
 const meta = {
-	component: PasswordInput,
+	component: FileInput,
 };
 
 export default meta;
 
 export const Default = {
 	args: {
-		label: "Password Input",
+		label: "File Input",
 		labelPosition: "top",
 		color: "blue",
-		placeholder: "Password",
 		required: true,
+		step: 1,
 		className: "w-full max-w-80",
 	},
+	render: (args) => <FileInput {...args} />,
 };

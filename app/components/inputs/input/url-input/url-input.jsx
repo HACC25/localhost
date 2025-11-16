@@ -76,9 +76,10 @@ function UrlInput({
 	);
 	return (
 		<InputWrapper
+			type="url"
 			label={label}
 			labelPosition={labelPosition}
-			required={required}
+			color={color}
 			className={urlInputWrapperClassName}
 		>
 			{button ? (

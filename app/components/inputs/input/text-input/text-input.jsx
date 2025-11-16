@@ -50,9 +50,10 @@ function TextInput({
 	);
 	return (
 		<InputWrapper
+			type="text"
 			label={label}
 			labelPosition={labelPosition}
-			required={required}
+			color={color}
 			className={textInputWrapperClassName}
 		>
 			<BaseInput

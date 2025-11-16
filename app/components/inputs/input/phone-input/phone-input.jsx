@@ -65,15 +65,19 @@ function PhoneInput({
 			placeholder={placeholder}
 			color={color}
 			onChange={internalOnChange}
+			pattern="\+?[0-9\s\-\.\(\)]{7,20}"
+			minlength="10"
+			maxlength="20"
 			className={phoneInputClassName}
 			{...attributes}
 		/>
 	);
 	return (
 		<InputWrapper
+			type="tel"
 			label={label}
 			labelPosition={labelPosition}
-			required={required}
+			color={color}
 			className={phoneInputWrapperClassName}
 		>
 			{button ? (

@@ -57,7 +57,7 @@ function SearchInput({
 
 	const searchInputComponent = (
 		<BaseInput
-			type="url"
+			type="search"
 			value={currentValue}
 			name={name}
 			required={required}
@@ -70,9 +70,10 @@ function SearchInput({
 	);
 	return (
 		<InputWrapper
+			type="search"
 			label={label}
 			labelPosition={labelPosition}
-			required={required}
+			color={color}
 			className={searchInputWrapperClassName}
 		>
 			{button ? (
