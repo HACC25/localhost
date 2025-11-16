@@ -8,3 +8,6 @@
 
 *storybook.log
 storybook-static
+
+/app/generated/prisma
+/prisma/migrations
