@@ -78,7 +78,17 @@
 	--color-aina-1: #175450;
 	--color-aina-2: #22767c;
 	--color-aina-3: #73c9cf;
+
+	/* width + height */
+	--spacing-overflow: calc(100% + 0.3em);
+	/* inset */
+	--spacing-spill: 0.15em;
+
+	/* icons; variably declared due to jsx string escape issues*/
+	--edit-off: "edit_off";
+	--wand-stars: "wand_stars";
 }
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*@layer utilities {
