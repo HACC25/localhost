@@ -82,7 +82,7 @@ function SearchInput({
 					<Button
 						type="button"
 						topClassName="px-2 py-1 w-16"
-						backgroundClassName="bg-[url(search.svg)]"
+						backgroundClassName="bg-[url('/search.svg')]"
 						color={color}
 						disabled={!hasValue}
 					>

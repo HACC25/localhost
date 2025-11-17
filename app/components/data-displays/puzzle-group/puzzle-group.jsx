@@ -12,6 +12,7 @@ import {
 } from "@dnd-kit/sortable";
 
 const propTypes = {
+	id: PropTypes.string,
 	color: PropTypes.oneOf(["red", "yellow", "green", "blue", "alternating"]),
 	direction: PropTypes.oneOf(["left", "right", "up", "down"]),
 	fillType: PropTypes.oneOf(["fill", "border", "gap", "inverse"]),
@@ -20,6 +21,7 @@ const propTypes = {
 };
 
 function PuzzleGroup({
+	id,
 	color = "blue",
 	direction = "right",
 	fillType = "gap",
@@ -52,7 +54,7 @@ function PuzzleGroup({
 		if (i === length - 1) return "end";
 		return "middle";
 	};
-	function handleDragEnd(event) {
+	/*function handleDragEnd(event) {
 		const { active, over } = event;
 		if (active.id !== over?.id) {
 			setItems((items) => {
@@ -61,11 +63,13 @@ function PuzzleGroup({
 				return arrayMove(items, oldIndex, newIndex);
 			});
 		}
-	}
+	}*/
 	return (
-		<DndContext onDragEnd={handleDragEnd}>
-			<div className={puzzleGroupClassName} {...attributes}>
+		<>
+			{/*<DndContext onDragEnd={handleDragEnd}>*/}
+			<div id={id} className={puzzleGroupClassName} {...attributes}>
 				<SortableContext
+					id={id}
 					items={items}
 					strategy={
 						["down", "up"].includes(direction)
@@ -90,7 +94,8 @@ function PuzzleGroup({
 					))}
 				</SortableContext>
 			</div>
-		</DndContext>
+			{/*</DndContext>*/}
+		</>
 	);
 }
 PuzzleGroup.propTypes = propTypes;

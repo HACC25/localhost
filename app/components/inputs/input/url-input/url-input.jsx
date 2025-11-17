@@ -88,7 +88,7 @@ function UrlInput({
 					<Button
 						type="link"
 						topClassName="px-2 py-1 w-16"
-						backgroundClassName="bg-[url(link.svg)]"
+						backgroundClassName="bg-[url('/link.svg')]"
 						color={color}
 						to={url}
 						disabled={!isValidUrl}

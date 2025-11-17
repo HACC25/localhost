@@ -102,11 +102,11 @@ function BaseInput({
 		"peer-user-invalid/input:bg-red-500",
 		"peer-user-invalid/input:after:content-['exclamation']",
 		"peer-read-only/input:opacity-100",
-		"peer-read-only/input:after:content-['edit\\_off']",
+		"peer-read-only/input:after:content-(--edit-off)",
 		"peer-user-valid/input:opacity-100",
 		"peer-user-valid/input:after:content-['check']",
 		"peer-autofill/input:opacity-100",
-		"peer-autofill/input:after:content-['wand\\_stars']",
+		"peer-autofill/input:after:content-(--wand-stars)",
 		color === "red" && [
 			"peer-read-only/input:bg-hawaii-red",
 			"peer-user-valid/input:bg-hawaii-red",

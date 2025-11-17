@@ -13,7 +13,7 @@ export const Default = {
 		type: "button",
 		depth: true,
 		children: "Button",
-		backgroundClassName: "bg-[url(hawaii.svg)]",
+		backgroundClassName: "bg-[url('/hawaii.svg')]",
 	},
 };
 
@@ -25,7 +25,7 @@ export const Link = {
 		depth: true,
 		children: "Button",
 		to: "https://www.google.com",
-		backgroundClassName: "bg-[url(hawaii.svg)]",
+		backgroundClassName: "bg-[url('/hawaii.svg')]",
 	},
 };
 
@@ -36,7 +36,7 @@ export const AllColors = {
 		type: "button",
 		depth: true,
 		children: "Blue Button",
-		backgroundClassName: "bg-[url(hawaii.svg)]",
+		backgroundClassName: "bg-[url('/hawaii.svg')]",
 	},
 	render: (args) => (
 		<div className="flex flex-col items-stretch gap-3">

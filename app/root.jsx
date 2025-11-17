@@ -9,6 +9,8 @@ import {
 import App from "~/pages/app";
 
 import "./app.css";
+import { useLoaderData } from "react-router";
+import { authenticate } from "~/lib/auth";
 import PropTypes from "prop-types";
 import DarkModeScript from "~/components/utils/dark-mode-script";
 
@@ -35,7 +37,15 @@ Layout.propTypes = {
 	children: PropTypes.node,
 };
 
-export default App;
+export async function loader({ request }) {
+	const user = await authenticate(request);
+	return { user };
+}
+
+export default function AppRoute() {
+	const { user } = useLoaderData();
+	return <App username={user?.username} />;
+}
 
 export function ErrorBoundary({ error }) {
 	let message = "Oops!";

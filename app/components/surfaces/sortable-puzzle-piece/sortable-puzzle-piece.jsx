@@ -8,11 +8,13 @@ const propTypes = {
 	id: PropTypes.string,
 	className: PropTypes.string,
 	style: PropTypes.object,
+	dragOverlay: PropTypes.bool,
 	children: PropTypes.node,
 };
 
 function SortablePuzzlePiece({
 	id,
+	dragOverlay = false,
 	className: additionalClassName,
 	style: additionalStyle,
 	children,
@@ -29,9 +31,10 @@ function SortablePuzzlePiece({
 
 	const style = {
 		...additionalStyle,
-		transform: CSS.Translate.toString(transform),
-		transition,
+		transform: dragOverlay ? undefined : CSS.Transform.toString(transform),
+		transition: dragOverlay ? undefined : transition,
 		zIndex: isDragging ? 1000 : additionalStyle?.zIndex,
+		opacity: dragOverlay && isDragging ? 0.5 : additionalStyle?.opacity,
 	};
 
 	const sortablePuzzlePieceClassName = clsx("cursor-move", additionalClassName);

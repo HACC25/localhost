@@ -83,7 +83,7 @@ function EmailInput({
 					<Button
 						type="link"
 						topClassName="px-2 py-1 w-16"
-						backgroundClassName="bg-[url(mail.svg)]"
+						backgroundClassName="bg-[url('/mail.svg')]"
 						color={color}
 						to={`mailto:${email}`}
 						disabled={!isValidEmail}

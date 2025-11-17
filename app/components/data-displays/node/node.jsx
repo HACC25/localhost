@@ -27,25 +27,28 @@ const propTypes = {
 		"reset",
 		"submit",
 		"button",
+		"section",
+		"row",
 	]),
 	className: PropTypes.string,
 	children: PropTypes.node,
 };
 
-function InputNode({
+function Node({
 	type = "text",
 	className: additionalClassName,
+	children,
 	...attributes
 }) {
-	const inputNodeClassName = clsx("flex flex-row", additionalClassName);
+	const nodeClassName = clsx("flex flex-row", additionalClassName);
 
 	return (
-		<div className={inputNodeClassName} {...attributes}>
+		<div className={nodeClassName} {...attributes}>
 			<span className="font-symbols pr-1">{typeToIcon(type)}</span>
-			<span>Income</span>
+			<span>{children}</span>
 		</div>
 	);
 }
-InputNode.propTypes = propTypes;
+Node.propTypes = propTypes;
 
-export default InputNode;
+export default Node;

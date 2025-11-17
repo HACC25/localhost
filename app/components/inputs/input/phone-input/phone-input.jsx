@@ -86,7 +86,7 @@ function PhoneInput({
 					<Button
 						type="link"
 						topClassName="px-2 py-1 w-16"
-						backgroundClassName="bg-[url(phone.svg)]"
+						backgroundClassName="bg-[url('/phone.svg')]"
 						color={color}
 						to={`tel:${phoneNumber}`}
 						disabled={!isValidNumber}

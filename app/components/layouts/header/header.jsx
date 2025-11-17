@@ -3,12 +3,14 @@ import PropTypes from "prop-types";
 import NavLink from "~/components/navigations/nav-link";
 
 const propTypes = {
+	username: PropTypes.string,
 	color: PropTypes.oneOf(["red", "yellow", "green", "blue"]),
 	className: PropTypes.string,
 	children: PropTypes.node,
 };
 
 function Header({
+	username,
 	color = "blue",
 	className: additionalClassName,
 	children,
@@ -38,7 +40,7 @@ function Header({
 	return (
 		<header className={headerClassName} {...attributes}>
 			<img
-				src="ets-logo.png"
+				src="/ets-logo.png"
 				className="h-full object-cover object-center py-1.5 max-sm:hidden"
 			/>
 			<div className="flex w-full flex-row items-center justify-center max-sm:gap-2">
@@ -84,9 +86,14 @@ function Header({
 					Contact
 				</NavLink>
 			</div>
-			<div className="font-symbols flex items-center justify-center text-2xl max-sm:hidden">
-				menu
-			</div>
+			<NavLink
+				to={username ? "/account" : "/login"}
+				icon="account_circle"
+				color={color}
+				className="max-sm:absolute max-sm:top-10 max-sm:right-5 max-sm:w-18"
+			>
+				{username || "Login"}
+			</NavLink>
 		</header>
 	);
 }

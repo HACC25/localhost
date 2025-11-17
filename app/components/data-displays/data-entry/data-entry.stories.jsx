@@ -1,7 +1,7 @@
-import InputNode from "./input-node";
+import DataEntry from "./data-entry";
 
 const meta = {
-	component: InputNode,
+	component: DataEntry,
 };
 
 export default meta;

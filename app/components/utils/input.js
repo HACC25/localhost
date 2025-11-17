@@ -27,6 +27,8 @@ export const typeIcons = {
 	toggle: "toggle_on",
 	array: "data_array",
 	object: "data_object",
+	section: "dataset",
+	row: "splitscreen_add",
 };
 
 export const inputTypes = [

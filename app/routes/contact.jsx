@@ -3,7 +3,7 @@ import Contact from "~/pages/contact";
 export function meta({}) {
 	return [
 		{ title: "ETS | Contact" },
-		{ name: "Contact", content: "Contact ETS" },
+		{ name: "description", content: "Contact ETS" },
 	];
 }
 

@@ -86,7 +86,7 @@ function Button({
 					],
 				]
 			: [
-					"p-4",
+					"p-2",
 					backgroundClassName,
 					color === "red" && "bg-hawaii-red-50 dark:bg-hawaii-red-950",
 					color === "yellow" && "bg-hawaii-yellow-50 dark:bg-hawaii-yellow-950",
@@ -117,7 +117,7 @@ function Button({
 		roundingClassNames[rounding],
 		backgroundClassName,
 		"flex items-center justify-center",
-		"size-fit min-h-full min-w-full p-4",
+		"size-fit min-h-full min-w-full p-2",
 		"relative",
 		"transition-all",
 		color === "red" && "bg-hawaii-red-50 dark:bg-hawaii-red-950",

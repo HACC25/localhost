@@ -4,17 +4,18 @@ import { Outlet } from "react-router";
 import Header from "~/components/layouts/header";
 
 const propTypes = {
+	username: PropTypes.string,
 	color: PropTypes.oneOf(["red", "yellow", "green", "blue"]),
 };
 
-function App({ color = "blue", ...attributes }) {
+function App({ username, color = "blue", ...attributes }) {
 	const appClassName = clsx(
-		"flex size-full items-center justify-center max-sm:flex-col-reverse sm:flex-col",
-		"bg-[url(background.jpg)] bg-cover bg-fixed",
+		"flex size-full min-h-full items-center max-sm:flex-col-reverse sm:flex-col",
+		"bg-[url('/background.jpg')] bg-cover bg-fixed",
 	);
 	return (
 		<div className={appClassName} {...attributes}>
-			<Header color={color} />
+			<Header color={color} username={username} />
 			<main className="h-full w-full max-w-screen-lg bg-white shadow-lg shadow-black dark:bg-black">
 				<Outlet />
 			</main>

@@ -75,7 +75,7 @@ function PasswordInput({
 				<Button
 					topClassName="px-2 py-1 w-16"
 					backgroundClassName={
-						showPassword ? "bg-[url(show.svg)]" : "bg-[url(hide.svg)]"
+						showPassword ? "bg-[url('/show.svg')]" : "bg-[url('/hide.svg')]"
 					}
 					color={color}
 					onClick={() => setShowPassword((prev) => !prev)}
