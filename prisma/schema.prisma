@@ -31,25 +31,48 @@ enum UserType {
 }
 
 model Form {
-  id        String    @id @default(uuid())
-  title     String
+  id          String     @id @default(uuid())
+  title       String
   description String?
-  
+
+  sections    Section[]  // instead of inputs directly
+  reports     Report[]
+  createdBy   String
+  admin       User       @relation(fields: [createdBy], references: [id])
+
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Section {
+  id        String   @id @default(uuid())
+  title     String?
+  position  Int      // position of section within form
+
+  formId    String
+  form      Form     @relation(fields: [formId], references: [id])
+
+  rows      Row[]
+}
+
+model Row {
+  id        String   @id @default(uuid())
+  position  Int      // position of row within section
+
+  sectionId String
+  section   Section  @relation(fields: [sectionId], references: [id])
+
   inputs    Input[]
-  reports   Report[]
-  createdBy String    // id of user
-  admin     User      @relation(fields: [createdBy], references: [id])
-  
-  createdAt DateTime  @default(now())
 }
 
 model Input {
   id        String   @id @default(uuid())
   label     String
   type      InputType
-  
-  formId    String
-  form      Form      @relation(fields: [formId], references: [id])
+  position  Int      // position of input within row
+
+  rowId     String
+  row       Row      @relation(fields: [rowId], references: [id])
 
   entries   ReportEntry[]
 }

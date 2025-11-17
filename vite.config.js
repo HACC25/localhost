@@ -17,6 +17,7 @@ export default defineConfig({
 			"~": path.resolve(dirname, "app"),
 		},
 	},
+	base: "/",
 	test: {
 		projects: [
 			{
