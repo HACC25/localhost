@@ -1,5 +1,5 @@
 import PuzzleGroup from "./puzzle-group";
-import InputNode from "~/components/data-displays/nodes/input-node";
+import Node from "~/components/data-displays/node";
 
 const meta = {
 	component: PuzzleGroup,
@@ -20,7 +20,7 @@ export const Nested = {
 	args: {
 		children: [
 			<PuzzleGroup color="red" key={1}>
-				<InputNode color="red" />
+				<Node color="red" />
 				<span>2</span>
 				<span>3</span>
 				<span>4</span>
