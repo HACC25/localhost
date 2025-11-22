@@ -37,7 +37,7 @@ function FormBuilder({ user = {}, ...attributes }) {
 	}, [overId]);
 	const sensors = useSensors(useSensor(PointerSensor));
 	const formBuilderClassName = clsx(
-		"flex size-full min-h-full gap-2 p-4",
+		"flex size-full min-h-fit gap-2 p-4",
 		"bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:20px_20px] bg-repeat dark:bg-[linear-gradient(to_right,#374151_1px,transparent_1px),linear-gradient(to_bottom,#374151_1px,transparent_1px)]",
 	);
 
@@ -102,8 +102,7 @@ function FormBuilder({ user = {}, ...attributes }) {
 							<label>Hide</label>
 						</Button>
 						<Form method="post">
-							<input name="action" type="hidden" value="save" />
-							<Button type="submit">
+							<Button type="submit" name="action" value="save">
 								<span className="font-symbols">save</span>
 								<label>Save</label>
 							</Button>

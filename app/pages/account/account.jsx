@@ -23,7 +23,7 @@ const propTypes = {
 
 function Account({ color = "blue", user = {}, success = {}, ...attributes }) {
 	const accountClassName = clsx(
-		"flex size-full min-h-full flex-col items-center justify-center gap-2 p-4",
+		"flex size-full min-h-fit flex-col items-center justify-center gap-2 p-4",
 	);
 
 	const [password, setPassword] = useState();
@@ -47,7 +47,6 @@ function Account({ color = "blue", user = {}, success = {}, ...attributes }) {
 					</Alert>
 				)}
 				<fieldset className="flex flex-col gap-1">
-					<input name="action" type="hidden" value="updateInfo" />
 					<input name="id" type="hidden" value={user.id} />
 					<Input
 						color={color}
@@ -79,7 +78,7 @@ function Account({ color = "blue", user = {}, success = {}, ...attributes }) {
 						required
 					/>
 				</fieldset>
-				<Button type="submit" color={color}>
+				<Button type="submit" name="action" value="updateInfo" color={color}>
 					Update
 				</Button>
 			</Form>
@@ -101,7 +100,6 @@ function Account({ color = "blue", user = {}, success = {}, ...attributes }) {
 					</Alert>
 				)}
 				<fieldset className="flex flex-col gap-1">
-					<input name="action" type="hidden" value="updatePassword" />
 					<input name="id" type="hidden" value={user.id} />
 					<Input
 						color={color}
@@ -125,7 +123,12 @@ function Account({ color = "blue", user = {}, success = {}, ...attributes }) {
 						required
 					/>
 				</fieldset>
-				<Button type="submit" color={color}>
+				<Button
+					type="submit"
+					color={color}
+					name="action"
+					value="updatePassword"
+				>
 					Update
 				</Button>
 			</Form>
@@ -141,8 +144,12 @@ function Account({ color = "blue", user = {}, success = {}, ...attributes }) {
 				>
 					Other Options
 				</ColoredText>
-				<input name="action" type="hidden" value="unauthenticate" />
-				<Button type="submit" color={color}>
+				<Button
+					type="submit"
+					color={color}
+					name="action"
+					value="unauthenticate"
+				>
 					Logout
 				</Button>
 			</Form>

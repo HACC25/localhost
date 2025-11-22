@@ -1,5 +1,9 @@
 import Contact from "~/pages/contact";
 
+export const handle = {
+	appColor: "green",
+};
+
 export function meta({}) {
 	return [
 		{ title: "ETS | Contact" },

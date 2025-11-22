@@ -15,7 +15,7 @@ const propTypes = {
 
 function Signup({ color = "blue", error, ...attributes }) {
 	const signupClassName = clsx(
-		"flex size-full min-h-full items-center justify-center p-4",
+		"flex size-full min-h-fit items-center justify-center p-4",
 	);
 
 	const [password, setPassword] = useState();

@@ -9,14 +9,15 @@ import makeAnimated from "react-select/animated";
 import { useState, useEffect } from "react";
 
 const propTypes = {
-	value: PropTypes.object,
+	value: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+	defaultValue: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 	name: PropTypes.string,
 	label: PropTypes.string,
 	labelPosition: PropTypes.oneOf(["top", "left", "bottom", "right"]),
 	required: PropTypes.bool,
 	placeholder: PropTypes.string,
 	color: PropTypes.oneOf(["red", "yellow", "green", "blue"]),
-	options: PropTypes.object,
+	options: PropTypes.array,
 	onChange: PropTypes.func,
 	disabled: PropTypes.bool,
 	isLoading: PropTypes.bool,
@@ -28,6 +29,7 @@ const propTypes = {
 
 function SelectInput({
 	value,
+	defaultValue,
 	name,
 	label,
 	labelPosition = "top",
@@ -44,9 +46,14 @@ function SelectInput({
 	className: additionalClassName,
 	...attributes
 }) {
-	const [currentValue, setCurrentValue] = useState(value);
+	const [currentValue, setCurrentValue] = useState(
+		JSON.parse(value || defaultValue || "[]") ?? null,
+	);
+
 	useEffect(() => {
-		setCurrentValue(value);
+		if (value !== undefined) {
+			setCurrentValue(JSON.parse(value || "[]"));
+		}
 	}, [value]);
 
 	const internalOnChange = (option) => {
@@ -376,13 +383,14 @@ function SelectInput({
 				tabIndex={-1}
 				autoComplete="off"
 				className="peer/wrapper sr-only"
-				value={currentValue ? currentValue.value : ""}
+				value={currentValue ? JSON.stringify(currentValue) : ""}
+				name={name}
 				required={required}
 			/>
 			<Select
 				options={options}
 				value={currentValue}
-				name={name}
+				defaultValue={defaultValue}
 				components={animatedComponents}
 				placeholder={placeholder}
 				onChange={internalOnChange}

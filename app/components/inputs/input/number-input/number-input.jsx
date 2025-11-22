@@ -10,6 +10,7 @@ import { useRef, useState, useEffect } from "react";
 
 const propTypes = {
 	value: PropTypes.number,
+	defaultValue: PropTypes.number,
 	name: PropTypes.string,
 	label: PropTypes.string,
 	labelPosition: PropTypes.oneOf(["top", "left", "bottom", "right"]),
@@ -25,6 +26,7 @@ const propTypes = {
 
 function NumberInput({
 	value,
+	defaultValue,
 	name,
 	label,
 	labelPosition = "top",
@@ -38,7 +40,7 @@ function NumberInput({
 	className: additionalClassName,
 	...attributes
 }) {
-	const [currentValue, setCurrentValue] = useState(value);
+	const [currentValue, setCurrentValue] = useState(value || defaultValue);
 	const disableDecrement = currentValue === min;
 	const disableIncrement = currentValue === max;
 	const capNumber = (number) => {
@@ -49,7 +51,7 @@ function NumberInput({
 	};
 
 	useEffect(() => {
-		setCurrentValue(capNumber(value));
+		if (value) setCurrentValue(capNumber(value));
 	}, [value, min, max]);
 
 	const internalOnChange = (e) => {
@@ -135,6 +137,7 @@ function NumberInput({
 					ref={numberInputRef}
 					type="number"
 					value={currentValue}
+					defaultValue={defaultValue}
 					name={name}
 					required={required}
 					placeholder={placeholder}

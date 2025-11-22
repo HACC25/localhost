@@ -40,7 +40,6 @@ function CheckboxInput({
 		const nextChecked = e.target.checked;
 		setIsChecked(nextChecked);
 
-		// Pass both the boolean and the value upward
 		if (onChange) onChange(e);
 	};
 

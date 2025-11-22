@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 const propTypes = {
 	value: PropTypes.any, // string or number value
 	checked: PropTypes.bool,
+	defaultChecked: PropTypes.bool,
 	name: PropTypes.string,
 	label: PropTypes.string,
 	labelPosition: PropTypes.oneOf(["top", "left", "bottom", "right"]),
@@ -18,7 +19,8 @@ const propTypes = {
 
 function ToggleInput({
 	value,
-	checked = false,
+	checked,
+	defaultChecked,
 	name,
 	label,
 	labelPosition = "top",
@@ -28,10 +30,10 @@ function ToggleInput({
 	className: additionalClassName,
 	...attributes
 }) {
-	const [isChecked, setIsChecked] = useState(checked);
+	const [isChecked, setIsChecked] = useState(checked || defaultChecked);
 
 	useEffect(() => {
-		setIsChecked(checked);
+		if (checked) setIsChecked(checked);
 	}, [checked]);
 
 	const internalOnChange = (e) => {
@@ -102,7 +104,8 @@ function ToggleInput({
 					name={name}
 					required={required}
 					checked={isChecked}
-					value={value} // keep value for form submissions
+					defaultChecked={defaultChecked}
+					value={isChecked} // keep value for form submissions
 					onChange={internalOnChange}
 					className="peer/input absolute z-1 h-full w-full opacity-0 not-disabled:cursor-pointer"
 					{...attributes}

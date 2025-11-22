@@ -34,7 +34,7 @@ function Button({
 	};
 	const buttonClassName = clsx(
 		"flex font-bold",
-		"items-center justify-center text-center",
+		"items-center justify-center gap-1 text-center",
 		"transition-all",
 		"select-none",
 		roundingClassNames[rounding],
@@ -116,7 +116,7 @@ function Button({
 	const buttonTopClassName = clsx(
 		roundingClassNames[rounding],
 		backgroundClassName,
-		"flex items-center justify-center",
+		"flex items-center justify-center gap-1",
 		"size-fit min-h-full min-w-full p-2",
 		"relative",
 		"transition-all",
@@ -154,7 +154,7 @@ function Button({
 	const Tag = isNormalButton ? "button" : LinkTag;
 	return (
 		<Tag
-			type={isNormalButton && type}
+			type={isNormalButton ? type : undefined}
 			disabled={disabled}
 			className={buttonClassName}
 			onContextMenu={(e) => e.preventDefault()}

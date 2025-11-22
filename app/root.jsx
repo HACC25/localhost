@@ -1,5 +1,7 @@
 import {
-	isRouteErrorResponse,
+	useLoaderData,
+	useRouteError,
+	useMatches,
 	Links,
 	Meta,
 	Outlet,
@@ -9,9 +11,9 @@ import {
 import App from "~/pages/app";
 
 import "./app.css";
-import { useLoaderData } from "react-router";
 import { authenticate } from "~/lib/auth";
 import PropTypes from "prop-types";
+import RootErrorBoundary from "~/components/utils/error-boundary";
 import DarkModeScript from "~/components/utils/dark-mode-script";
 
 export function Layout({ children }) {
@@ -44,36 +46,15 @@ export async function loader({ request }) {
 
 export default function AppRoute() {
 	const { user } = useLoaderData();
-	return <App username={user?.username} />;
+	const matches = useMatches();
+	const current = matches[matches.length - 1];
+	const color = current.handle?.appColor ?? "blue";
+	return <App username={user?.username} color={color} />;
 }
 
-export function ErrorBoundary({ error }) {
-	let message = "Oops!";
-	let details = "An unexpected error occurred.";
-	let stack;
-
-	if (isRouteErrorResponse(error)) {
-		message = error.status === 404 ? "404" : "Error";
-		details =
-			error.status === 404
-				? "The requested page could not be found."
-				: error.statusText || details;
-	} else if (import.meta.env.DEV && error && error instanceof Error) {
-		details = error.message;
-		stack = error.stack;
-	}
-
-	return (
-		<main className="container mx-auto p-4 pt-16">
-			<h1>{message}</h1>
-			<p>{details}</p>
-			{stack && (
-				<pre className="w-full overflow-x-auto p-4">
-					<code>{stack}</code>
-				</pre>
-			)}
-		</main>
-	);
+export function ErrorBoundary() {
+	const error = useRouteError();
+	return <RootErrorBoundary error={error} />;
 }
 
 ErrorBoundary.propTypes = {

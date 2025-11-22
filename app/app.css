@@ -125,6 +125,6 @@
 	}
 	html,
 	body {
-		@apply size-full bg-white font-sans text-black dark:bg-gray-950 dark:text-white;
+		@apply size-full overflow-auto bg-white font-sans text-black dark:bg-gray-950 dark:text-white;
 	}
 }

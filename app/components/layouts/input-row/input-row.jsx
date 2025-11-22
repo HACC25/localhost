@@ -7,10 +7,7 @@ const propTypes = {
 };
 
 function InputRow({ className: additionalClassName, children, ...attributes }) {
-	const inputRowClassName = clsx(
-		"flex flex-row flex-wrap gap-2",
-		additionalClassName,
-	);
+	const inputRowClassName = clsx("flex flex-wrap gap-2", additionalClassName);
 	return (
 		<div className={inputRowClassName} {...attributes}>
 			{children}

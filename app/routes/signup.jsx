@@ -3,6 +3,10 @@ import { createUser } from "~/lib/user";
 import { authenticateUserByEmail } from "~/lib/auth";
 import { useActionData } from "react-router";
 
+export const handle = {
+	appColor: "yellow", // 👈 your metadata
+};
+
 export function meta({}) {
 	return [
 		{ title: "ETS | Signup" },
@@ -34,5 +38,5 @@ export async function action({ request }) {
 
 export default function SignupRoute() {
 	const actionData = useActionData();
-	return <Signup error={actionData?.error} />;
+	return <Signup color="yellow" error={actionData?.error} />;
 }

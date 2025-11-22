@@ -83,11 +83,15 @@ export async function getLatestForm() {
 		orderBy: { updatedAt: "desc" },
 		include: {
 			sections: {
-				orderBy: { order: "asc" },
+				orderBy: { position: "asc" },
 				include: {
 					rows: {
-						orderBy: { order: "asc" },
-						include: { inputs: { orderBy: { order: "asc" } } },
+						orderBy: { position: "asc" },
+						include: {
+							inputs: {
+								orderBy: { position: "asc" },
+							},
+						},
 					},
 				},
 			},

@@ -15,12 +15,27 @@ export async function createReport(userId) {
 	});
 }
 
+export async function deleteReportById(reportId) {
+	return await prisma.report.delete({
+		where: { id: reportId },
+	});
+}
+
 // Update report entries on save
-export async function updateReport(reportId, entries) {
+export async function updateReport(
+	reportId,
+	entries,
+	title,
+	description,
+	status,
+) {
 	// entries = [{ inputId, value }]
-	return prisma.report.update({
+	return await prisma.report.update({
 		where: { id: reportId },
 		data: {
+			status,
+			title,
+			description,
 			entries: {
 				upsert: entries.map((e) => ({
 					where: { reportId_inputId: { reportId, inputId: e.inputId } },
@@ -34,7 +49,7 @@ export async function updateReport(reportId, entries) {
 
 // Publish report (set to pending)
 export async function publishReport(reportId) {
-	return prisma.report.update({
+	return await prisma.report.update({
 		where: { id: reportId },
 		data: { status: "PENDING" },
 	});
@@ -43,7 +58,7 @@ export async function publishReport(reportId) {
 // ADMIN FUNCTIONS
 // Get most recent pending report
 export async function getLatestPendingReport() {
-	return prisma.report.findFirst({
+	return await prisma.report.findFirst({
 		where: { status: "PENDING" },
 		orderBy: { updatedAt: "desc" },
 		include: { user: true, entries: { include: { input: true } } },
@@ -51,16 +66,30 @@ export async function getLatestPendingReport() {
 }
 
 // Approve report with PDF link
-export async function approveReport(reportId, pdfLink) {
-	return prisma.report.update({
+export async function approveReportWithLink(reportId, pdfLink) {
+	return await prisma.report.update({
 		where: { id: reportId },
 		data: { status: "APPROVED", certificate: pdfLink },
 	});
 }
 
+export async function approveReportById(reportId) {
+	return await prisma.report.update({
+		where: { id: reportId },
+		data: { status: "APPROVED" },
+	});
+}
+
+export async function rejectReportById(reportId) {
+	return await prisma.report.update({
+		where: { id: reportId },
+		data: { status: "REJECTED" },
+	});
+}
+
 // USER/PUBLIC FUNCTIONS
 export async function listReportsByVendor() {
-	return prisma.report.findMany({
+	const reports = await prisma.report.findMany({
 		where: {
 			user: {
 				type: "VENDOR",
@@ -71,6 +100,47 @@ export async function listReportsByVendor() {
 			id: true,
 			status: true,
 			updatedAt: true,
+			title: true,
+			form: {
+				select: {
+					id: true,
+					title: true,
+					description: true,
+				},
+			},
+			user: {
+				select: {
+					id: true,
+					username: true,
+					name: true,
+					email: true,
+				},
+			},
+		},
+		orderBy: { updatedAt: "desc" },
+	});
+
+	return reports?.reduce((acc, report) => {
+		const username = report.user.username;
+		if (!acc[username]) acc[username] = [];
+		acc[username].push(report);
+		return acc;
+	}, {});
+}
+
+export async function listReportsAwaitingApproval() {
+	return await prisma.report.findMany({
+		where: {
+			user: {
+				type: "VENDOR",
+			},
+			status: "PENDING",
+		},
+		select: {
+			id: true,
+			status: true,
+			updatedAt: true,
+			title: true,
 			form: {
 				select: {
 					id: true,
@@ -90,11 +160,55 @@ export async function listReportsByVendor() {
 		orderBy: { updatedAt: "desc" },
 	});
 }
-export async function getReportsByVendor() {
-	return prisma.report.findMany({
+
+export async function listUnownedReportsByVendor(userId) {
+	const reports = await prisma.report.findMany({
 		where: {
 			user: {
 				type: "VENDOR",
+				NOT: {
+					id: userId,
+				},
+			},
+			status: "APPROVED", // <-- only published reports
+		},
+		select: {
+			id: true,
+			status: true,
+			updatedAt: true,
+			title: true,
+			form: {
+				select: {
+					id: true,
+					title: true,
+					description: true,
+				},
+			},
+			user: {
+				select: {
+					id: true,
+					username: true,
+					name: true,
+					email: true,
+				},
+			},
+		},
+		orderBy: { updatedAt: "desc" },
+	});
+
+	return reports?.reduce((acc, report) => {
+		const username = report.user.username;
+		if (!acc[username]) acc[username] = [];
+		acc[username].push(report);
+		return acc;
+	}, {});
+}
+
+export async function getReportsByVendor(userId) {
+	return prisma.report.findMany({
+		where: {
+			user: {
+				id: userId,
 			},
 		},
 		include: {
@@ -123,6 +237,7 @@ export async function getReportsByVendor() {
 		orderBy: { updatedAt: "desc" },
 	});
 }
+
 export async function getReportById(reportId) {
 	return prisma.report.findUnique({
 		where: { id: reportId },

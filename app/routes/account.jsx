@@ -1,7 +1,7 @@
 import Account from "~/pages/account";
 import { authenticate, unauthenticate } from "~/lib/auth";
 import { updateUserById, updateUserPasswordById } from "~/lib/user";
-import { useActionData, useLoaderData } from "react-router";
+import { useActionData, useLoaderData, redirect } from "react-router";
 
 export function meta({}) {
 	return [
@@ -12,6 +12,7 @@ export function meta({}) {
 
 export async function loader({ request }) {
 	const user = await authenticate(request);
+	if (!user) return redirect("/login");
 	return { user };
 }
 

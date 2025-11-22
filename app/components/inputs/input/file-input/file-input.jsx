@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 
 const propTypes = {
 	value: PropTypes.string,
+	defaultValue: PropTypes.string,
 	name: PropTypes.string,
 	label: PropTypes.string,
 	labelPosition: PropTypes.oneOf(["top", "left", "bottom", "right"]),
@@ -20,6 +21,7 @@ const propTypes = {
 
 function FileInput({
 	value,
+	defaultValue,
 	name,
 	label,
 	labelPosition = "top",
@@ -37,7 +39,7 @@ function FileInput({
 
 	const internalOnChange = (e) => {
 		if (onChange) onChange(e);
-		setCurrentValue(e.target.value);
+		setCurrentValue(e.target.files);
 		const firstFile = e.target.files[0];
 		const firstFileUrl = URL.createObjectURL(firstFile);
 
@@ -96,10 +98,14 @@ function FileInput({
 			className={fileInputWrapperClassName}
 		>
 			<InputRow>
+				<input
+					type="hidden"
+					name={name}
+					value={currentValue}
+					defaultValue={defaultValue}
+				/>
 				<BaseInput
 					type="file"
-					value={currentValue}
-					name={name}
 					required={required}
 					color={color}
 					onChange={internalOnChange}

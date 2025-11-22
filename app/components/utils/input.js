@@ -1,5 +1,6 @@
 export const typeIcons = {
 	text: "text_fields",
+	textarea: "short_text",
 	number: "numbers",
 	password: "password",
 	file: "attach_file",
@@ -29,6 +30,7 @@ export const typeIcons = {
 	object: "data_object",
 	section: "dataset",
 	row: "splitscreen_add",
+	bar: "bar_chart",
 };
 
 export const inputTypes = [

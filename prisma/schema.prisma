@@ -5,7 +5,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -70,6 +69,8 @@ model Input {
   label     String
   type      InputType
   position  Int      // position of input within row
+  required  Boolean  @default(false)
+  options   Json?     // for complicated inputs
 
   rowId     String
   row       Row      @relation(fields: [rowId], references: [id])
@@ -79,15 +80,24 @@ model Input {
 
 enum InputType {
   TEXT
+  TEXTAREA
+  URL
+  EMAIL
+  TEL
   NUMBER
+  SELECT
+  TOGGLE
   FILE
-  BAR_GRAPH
-  LINE_GRAPH
+  BAR
+  LINE
   TABLE
 }
 
 model Report {
   id          String      @id @default(uuid())
+  
+  title       String?
+  description String?
   
   formId      String
   form        Form        @relation(fields: [formId], references: [id])
@@ -118,4 +128,6 @@ model ReportEntry {
   input     Input     @relation(fields: [inputId], references: [id])
   
   value     Json      // flexible: text, number, file path, structured graph/table data
+  
+  @@unique([reportId, inputId])
 }

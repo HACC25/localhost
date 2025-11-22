@@ -19,7 +19,7 @@ function Alert({
 }) {
 	const alertClassName = clsx(
 		"text-lg font-bold",
-		"flex-row items-center justify-center",
+		"flex-row items-center justify-center gap-1",
 		type === "text" && ["inline-flex"],
 		type !== "text" && ["flex rounded-lg p-2 text-white"],
 		type === "notification" && ["absolute top-5 left-5"],

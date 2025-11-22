@@ -2,12 +2,14 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 
 const propTypes = {
+	tag: PropTypes.string,
 	color: PropTypes.oneOf(["red", "yellow", "green", "blue"]),
 	showMeta: PropTypes.bool,
 	className: PropTypes.string,
 };
 
 function BaseInput({
+	tag = "input",
 	color = "blue",
 	showMeta = true,
 	className: additionalClassName,
@@ -129,9 +131,11 @@ function BaseInput({
 		],
 	);
 
+	const Tag = tag || "input";
+
 	return (
 		<div className="peer/wrapper relative flex w-full flex-row items-center justify-center">
-			<input className={baseInputClassName} {...attributes} />
+			<Tag className={baseInputClassName} {...attributes} />
 			{showMeta && <span className={metaClassName} />}
 		</div>
 	);

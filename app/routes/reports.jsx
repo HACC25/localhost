@@ -1,7 +1,13 @@
 import Reports from "~/pages/reports";
 import { authenticate } from "~/lib/auth";
-import { useLoaderData } from "react-router";
-import { listReportsByVendor } from "~/lib/report";
+import { useLoaderData, redirect } from "react-router";
+import { findUserWithReportsById } from "~/lib/user";
+import {
+	listUnownedReportsByVendor,
+	listReportsAwaitingApproval,
+	createReport,
+	deleteReportById,
+} from "~/lib/report";
 
 export function meta({}) {
 	return [
@@ -12,17 +18,37 @@ export function meta({}) {
 
 export async function loader({ request }) {
 	const user = await authenticate(request);
-	const reports = await listReportsByVendor();
-	return { user, reports };
+
+	const finalUser =
+		user?.type === "VENDOR" ? await findUserWithReportsById(user?.id) : user;
+	const reports = await listUnownedReportsByVendor(user?.id);
+	const reportsAwaitingApproval =
+		user?.type === "ADMIN" ? await listReportsAwaitingApproval() : undefined;
+	return { user: finalUser, reports, reportsAwaitingApproval };
+}
+
+export async function action({ request }) {
+	const formData = await request.formData();
+	const action = formData.get("action");
+
+	if (action === "newReport") {
+		const userId = formData.get("userId");
+		const report = await createReport(userId);
+		return redirect(`/report-builder/${report?.id}`);
+	}
+	if (action === "deleteReport") {
+		const reportId = formData.get("reportId");
+		return await deleteReportById(reportId);
+	}
 }
 
 export default function ReportsRoute() {
-	const { user, reports } = useLoaderData();
-	const grouped = reports?.reduce((acc, report) => {
-		const username = report.user.username;
-		if (!acc[username]) acc[username] = [];
-		acc[username].push(report);
-		return acc;
-	}, {});
-	return <Reports user={user} reports={grouped} />;
+	const { user, reports, reportsAwaitingApproval } = useLoaderData();
+	return (
+		<Reports
+			user={user}
+			reports={reports}
+			reportsAwaitingApproval={reportsAwaitingApproval}
+		/>
+	);
 }

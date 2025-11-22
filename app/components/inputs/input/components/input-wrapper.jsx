@@ -25,7 +25,7 @@ function InputWrapper({
 	...attributes
 }) {
 	const wrapperClassName = clsx(
-		"flex gap-1",
+		"flex flex-auto gap-1",
 		{
 			"flex-col justify-center": labelPosition === "top",
 			"flex-col-reverse justify-center": labelPosition === "bottom",

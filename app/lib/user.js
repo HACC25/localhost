@@ -7,6 +7,30 @@ export async function findUserById(id) {
 	});
 }
 
+export async function findUserWithReportsById(id) {
+	return prisma.user.findUnique({
+		where: { id },
+		include: {
+			reports: {
+				orderBy: { updatedAt: "desc" },
+				select: {
+					id: true,
+					status: true,
+					updatedAt: true,
+					title: true,
+					form: {
+						select: {
+							id: true,
+							title: true,
+							description: true,
+						},
+					},
+				},
+			},
+		},
+	});
+}
+
 export async function findUserByUsername(username) {
 	return prisma.user.findUnique({
 		where: { username },

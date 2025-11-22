@@ -24,7 +24,7 @@ function TextInput({
 	label,
 	labelPosition = "top",
 	required = false,
-	placeholder = "Enter text...",
+	placeholder,
 	color = "blue",
 	onChange,
 	className: additionalClassName,
@@ -61,7 +61,7 @@ function TextInput({
 				value={currentValue}
 				name={name}
 				required={required}
-				placeholder={placeholder}
+				placeholder={placeholder || `Enter ${label?.toLowerCase()}...`}
 				color={color}
 				onChange={internalOnChange}
 				className={textInputClassName}
